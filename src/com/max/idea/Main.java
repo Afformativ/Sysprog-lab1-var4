@@ -1,5 +1,5 @@
 package com.max.idea;
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -22,36 +22,33 @@ public class Main {
                 }
                 List<String> wordsInLine = Arrays.asList(nextLine.split("[^a-zA-ZА-Яа-яЮюЄєІіҐґЇї]", 0));
                 for (String word : wordsInLine) {
-                    String current = word;
-                    current = current.trim().toLowerCase();
-                    if (current.length() > 30) {
-                        current = current.substring(0, 30);
+                    word = word.toLowerCase();
+                    if (word.length() > 30) {
+                        word = word.substring(0, 30);
                     }
-                    Boolean corect = true;
-                    if (words.contains(current) || current.isEmpty()) {
-                        corect = false;
+                    Boolean correct = true;
+                    if (words.contains(word) || word.isEmpty()) {
+                        correct = false;
                     }
-                    for (int i = 0; i < current.length() - 1; i++) {
-                        char first = current.charAt(i);
-                        for (int j = i + 1; j < current.length(); j++) {
-                            if (first == current.charAt(j)) {
-                                corect = false;
+                    for (int i = 0; i < word.length() - 1; i++) {
+                        char first = word.charAt(i);
+                        for (int j = i + 1; j < word.length(); j++) {
+                            if (first == word.charAt(j)) {
+                                correct = false;
                             }
                         }
                     }
-                    if (corect) {
-                        words.add(current);
+                    if (correct) {
+                        words.add(word);
                     }
                 }
             }
-            for(String word : words){
-                System.out.print(word + " ");
+            for(String Finalword : words){
+                System.out.print(Finalword + " \n ");
             }
         } catch (IOException | NoSuchElementException | IllegalStateException e){
-            e.printStackTrace();
-        }
-        finally {
-            inputFile.close();
+            //e.printStackTrace();
+            System.out.println("Something wrong\n");
         }
     }
 }
